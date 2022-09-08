@@ -1,0 +1,41 @@
+<img src="/upload/uploaded?datosUsuarios=${fotoperfil}" /><!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Inicio</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+        <a th:href="@{/agregar}">Crear Usuario</a>
+        <div th:if="${datosUsuarios != null and !datosUsuarios.empty}">
+            <table border="1">
+                <tr>
+                    <th>Foto de Perfil</th>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Genero</th>
+                    <th>Status</th>
+                    <th>Eliminar</th>
+                    <th>Editar</th>
+                </tr>
+                <tr th:each="datosUsuario : ${datosUsuarios}">
+                    <td> <img src="${datosUsuario.fotoperfil" /> </td>
+                    <td th:text="${datosUsuario.idusuario}">Mostrar ID</td>
+                    <td th:text="${datosUsuario.nombreusuario}">Mostrar Nombre</td>
+                    <td th:text="${datosUsuario.emailusuario}">Mostrar Email</td>
+                    <td th:text="${datosUsuario.generousuario}">Mostrar Género</td>
+                    <td th:text="${datosUsuario.statususuario}">Mostrar Status</td>
+                    <td> <a th:href="@{/eliminar/} + ${datosUsuario.idusuario}" th:text="Eliminar"/></td>
+                    <td> <a th:href="@{/editar/} + ${datosUsuario.idusuario}" th:text="Editar"/></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${ datosUsuarios == null or datosUsuarios.empty }">
+            La lista de personas es vacía
+        </div>
+        
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>

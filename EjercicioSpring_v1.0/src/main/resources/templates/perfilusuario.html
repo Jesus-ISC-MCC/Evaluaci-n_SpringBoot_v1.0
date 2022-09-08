@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Datos de la persona</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+        <h2>Datos de la persona</h2>
+        <a th:href="@{/}">Regresar</a>
+        <br/>
+        <form th:action="@{/guardar}" method="post" th:object="${datosUsuarios}">
+            <input type="hidden" name="id" th:field="*{idusuario}"/>
+            <img src="/upload/uploaded?datosUsuarios=${fotoperfil}" />
+            <br/>
+            <label for="nombreusuario">Nombre Usuario: </label>
+            <input type="text" name="nombreusuario" th:field="*{nombreusuario}"/>
+            <span th:if="${#fields.hasErrors('nombreusuario')}" th:errors="*{nombreusuario}">Error en el código</span>
+            <br/>
+            <label for="emailusuario">Email: </label>
+            <input type="text" name="emailusuario" th:field="*{emailusuario}"/>
+            <span th:if="${#fields.hasErrors('emailusuario')}" th:errors="*{emailusuario}">Email</span>
+            <br/>
+            <label for="generousuario">Género: </label>
+            <input type="text" name="generousuario" th:field="*{generousuario}"/>
+            <span th:if="${#fields.hasErrors('generousuario')}" th:errors="*{generousuario}">Género</span>
+            <br/>
+            <label for="statususuario">Status: </label>
+            <input type="text" name="statususuario" th:field="*{statususuario}"/>
+            <span th:if="${#fields.hasErrors('statususuario')}" th:errors="*{statususuario}">Status</span>
+            <br/>
+            <label for="fotoperfil">Foto de Perfil: </label>
+            <!--
+            <input type="file" name="fotoperfil" th:field="*{fotoperfil}"/>
+            <span th:if="${#fields.hasErrors('fotoperfil')}" th:errors="*{fotoperfil}">Foto de perfil</span>
+            -->
+            <br/>
+            <input type="submit" name="guardar" value="Guardar"/>
+        </form>
+        
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Datos de la persona</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"></header>
+        <h2>Datos de la persona</h2>
+        <a th:href="@{/}">Regresar</a>
+        <br/>
+        <form th:action="@{/guardar}" method="post" th:object="${datosUsuarios}">
+            <input type="hidden" name="id" th:field="*{idusuario}"/>
+            <br/>
+            <label for="nombreusuario">Nombre Usuario: </label>
+            <input type="text" name="nombreusuario" th:field="*{nombreusuario}"/>
+            <span th:if="${#fields.hasErrors('nombreusuario')}" th:errors="*{nombreusuario}">Error en el código</span>
+            <br/>
+            <label for="emailusuario">Email: </label>
+            <input type="text" name="emailusuario" th:field="*{emailusuario}"/>
+            <span th:if="${#fields.hasErrors('emailusuario')}" th:errors="*{emailusuario}">Email</span>
+            <br/>
+            <label for="generousuario">Género: </label>
+            <select name="generousuario" th:select="*{generousuario}">
+                <option value="1">Mujer</option>
+                <option value="2" selected>Hombre</option>
+            </select>
+            <span th:if="${#fields.hasErrors('generousuario')}" th:errors="*{generousuario}">Género</span>
+            <br/>
+            <label for="statususuario">Status: </label>
+            <select name="statususuario" th:select="*{statususuario}">
+                <option value="200">Activo</option>
+                <option value="500" selected>Inhabilitado</option>
+            </select>
+            <span th:if="${#fields.hasErrors('statususuario')}" th:errors="*{statususuario}">Status</span>
+            <br/>
+            <label for="fotoperfil">Foto de Perfil: </label>
+            <input type="file" name="fotoperfil" th:field="*{fotoperfil}"/>
+            <br/>
+            <input type="submit" name="guardar" value="Guardar"/>
+        </form>
+        
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>
